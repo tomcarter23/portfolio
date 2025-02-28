@@ -3,7 +3,7 @@ name: Deploy to AWS S3
 on:
   push:
     branches:
-      - master  # Deploys only when pushing to main
+      - master  # Deploys only when pushing to master
 
 jobs:
   deploy:
