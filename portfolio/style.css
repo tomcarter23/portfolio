@@ -116,6 +116,7 @@ footer{
     }
     nav a.active-link{
         border-bottom: none;
+        border-left: 4px solid var(--accent-color);
     }
     nav .home-li{
         margin-right: unset;
