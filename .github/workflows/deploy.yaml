@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Deps
+        run: npm install
+
+      - name: Run 11ty Build
+        run: npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
