@@ -18,7 +18,7 @@ jobs:
         run: npm install
 
       - name: Run 11ty Build
-        run: npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site
+        run: npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site --config portfolio/eleventy.config.js
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -28,7 +28,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync files to S3
-        run: aws s3 sync ./portfolio s3://${{ secrets.S3_BUCKET_NAME }} --delete --acl public-read
+        run: aws s3 sync ./portfolio/_site s3://${{ secrets.S3_BUCKET_NAME }} --delete --acl public-read
 
       - name: Invalidate CloudFront Dist 1
         run: |
