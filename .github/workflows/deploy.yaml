@@ -18,7 +18,7 @@ jobs:
         run: npm install
 
       - name: Run 11ty Build
-        run: npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site
+        run: npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site --config portfolio/eleventy.config.js
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
