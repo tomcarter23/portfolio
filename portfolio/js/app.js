@@ -36,10 +36,17 @@ navLinks.forEach(link => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    let currentPage = window.location.pathname;
+
+    // Normalize URL paths:
+    if (currentPage.endsWith("/")) {
+        currentPage += "index.html"; // Treat "/cv/" as "/cv/index.html"
+    }
 
     document.querySelectorAll(".nav-link").forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
+        let linkPath = new URL(link.href, window.location.origin).pathname;
+
+        if (linkPath === currentPage) {
             link.classList.add("active-link");
         }
     });
