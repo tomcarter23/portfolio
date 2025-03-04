@@ -81,7 +81,29 @@ footer{
     display: none;
 }
 
-@media screen and (max-width: 700px){
+#profile_photo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 4px 8px 0 var(--hover-color), 0 6px 20px 0 var(--hover-color);
+}
+#about-container {
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  
+#about-container .about-item {
+    padding: 0.5rem;
+    max-width: 500px;
+  }
+
+
+  @media screen and (max-width: 700px){
     #open-sidebar-button, #close-sidebar-button{
         display: block;
       }
@@ -120,5 +142,8 @@ footer{
     }
     nav .home-li{
         margin-right: unset;
+    }
+    #about-container {
+        flex-direction: column;
     }
 }
