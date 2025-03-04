@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master  # Deploys only when pushing to master
+  workflow_dispatch:
 
 jobs:
   deploy:
