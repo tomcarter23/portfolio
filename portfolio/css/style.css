@@ -109,6 +109,10 @@ footer{
   flex-direction: column;    /* stack children if multiple */
 }
 
+#projects {
+  scroll-margin-top: 80px; /* match navbar height */
+}
+
 .section-inner {
   display: flex;
   flex-direction: column;
@@ -346,6 +350,11 @@ display: none;
     nav .home-li{
         margin-right: unset;
     }
+
+    #profile_photo {
+        max-width: 300px;
+    }
+
     .about-container {
         flex-direction: column;
     }
