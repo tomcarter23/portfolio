@@ -24,8 +24,14 @@ function openSidebar(){
 function closeSidebar(){
     navbar.classList.remove("show")
     openButton.setAttribute("aria-expanded", "false")
-    navbar.setAttribute("inert", "")
+
+    if (window.innerWidth < 700) {
+        navbar.setAttribute("inert", "")
+    } else {
+        navbar.removeAttribute("inert")
+    }
 }
+
 
 const navLinks = document.querySelectorAll("nav a")
 navLinks.forEach(link => {
@@ -36,20 +42,40 @@ navLinks.forEach(link => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    let currentPage = window.location.pathname;
+    const navLinks = document.querySelectorAll(".nav-link");
 
-    // Normalize URL paths:
-    if (currentPage.endsWith("/")) {
-        currentPage += "index.html"; // Treat "/cv/" as "/cv/index.html"
+    function updateActiveLink() {
+        const hash = window.location.hash; // "" if no hash
+        let found = false;
+
+        navLinks.forEach(link => {
+            const linkTarget = link.getAttribute("href");
+
+            if (hash && linkTarget === hash) {
+                link.classList.add("active-link");
+                found = true;
+            } else {
+                link.classList.remove("active-link");
+            }
+        });
+
+        // If no hash match, highlight the home page link
+        if (!found) {
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === "/index.html") {
+                    link.classList.add("active-link");
+                }
+            });
+        }
     }
 
-    document.querySelectorAll(".nav-link").forEach(link => {
-        let linkPath = new URL(link.href, window.location.origin).pathname;
+    // Update on page load
+    updateActiveLink();
 
-        if (linkPath === currentPage) {
-            link.classList.add("active-link");
-        }
-    });
+    // Update when hash changes
+    window.addEventListener("hashchange", updateActiveLink);
 });
+
+
 
 updateNavbar(media)

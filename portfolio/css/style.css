@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');:root{
     --primary-color: #ffffff;
     --hover-color: #d3d3d3;
-    --accent-color: #20B2AA;
+    --accent-color: rgba(32, 178, 170, 0.6);;
+    --accent-color-faded: rgba(32, 178, 170, 0.2); /* same teal, 50% alpha */
     --text-color: #555555;
   }
   *{
@@ -12,14 +13,17 @@
 html{
     font-family: "Space Grotesk", sans-serif;
     color: var(--text-color);
+    overflow: hidden;
+    scroll-padding-top: 80px; /* height of navbar */
 }
+
 body{
     min-height: 100vh;
     min-height: 100dvh;
     background-color: var(--primary-color);
 }
 main{
-    padding: min(5em, 7%);
+    padding: 0;
 }
 main p{
     margin-top: .35em;
@@ -85,25 +89,224 @@ footer{
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    max-width: 300px;
+    max-width: 350px;
     box-shadow: 0 4px 8px 0 var(--hover-color), 0 6px 20px 0 var(--hover-color);
 }
-#about-container {
+
+.container {
+  height: 100vh;               /* full viewport height */
+  overflow-y: scroll;          /* vertical scroll */
+  scroll-snap-type: y mandatory; /* snap vertically */
+  scroll-behavior: smooth;     /* smooth animation */
+}
+
+.section {
+  height: calc(100vh - 50px);            /* each section takes full screen */
+  scroll-snap-align: start;    /* snap to the start of each section */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;    /* stack children if multiple */
+}
+
+.section-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centers content vertically inside wrapper */
+  align-items: center;
+  height: 100%;             /* fill parent section height */
+  width: 100%;              /* optional */
+  box-sizing: border-box;
+}
+
+.about-container {
     display: flex;
     flex-direction: row;
     text-align: justify;
     justify-content: center;
+    align-content: center;
     align-items: center;
     gap: 40px;
+    padding: 2.0rem;
   }
   
-#about-container .about-item {
+.about-container .about-item {
     padding: 0.5rem;
     max-width: 500px;
   }
 
 
-  @media screen and (max-width: 700px){
+
+.heading-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    align-items: left;
+    padding: 1.0rem;
+}
+
+.carousel {
+    width: 90%;          /* stays within parent */
+    max-width: 100%;      /* prevents body overflow */
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: 1em;
+    margin: 1em auto;
+    padding: 1em;
+     padding-bottom: 2rem; /* space for downward shadow */
+
+    display: flex;
+    align-content: center;
+}
+
+.carousel-inner {
+  display: flex;
+  gap: 3em;
+  overflow: visible; /* allow shadows to bleed */
+}
+
+.carousel::-webkit-scrollbar{
+display: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* stack items top → bottom */
+  align-items: center;           /* center horizontally */
+  text-align: center;            /* center text inside card-content */
+
+  flex: 0 0 42em;
+  height: 30em;
+  background: linear-gradient(135deg, var(--accent-color-faded), var(--primary-color));
+  padding: 2em;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 8px 0 var(--hover-color), 0 6px 20px 0 var(--hover-color);
+  color: var(--text-color);
+  position: relative;
+}
+
+.experience-logo-container {
+  border-radius: 50%;
+  width: 7em;
+  height: 7em;
+  margin-bottom: 1rem; /* spacing between logo and content */
+  background: white;
+  display: flex;              /* enable flexbox */
+  align-items: center;        /* vertical centering */
+  justify-content: center;    /* horizontal centering */
+  flex-shrink: 0; /* prevent flexbox from compressing it */
+}
+
+.logo-shift-left {
+  justify-content: flex-start;   /* anchor to left */
+  padding-left: 0.2em;           /* fine-tune */
+}
+
+.experience-logo {
+    max-width: 6.5em;
+    max-height: 6.5em;
+    width: auto;
+    height: auto;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column; /* stack h1 → tech-logos → h3 */
+  align-items: left;    /* center everything horizontally */
+  gap: 0.5em;             /* space between elements */
+  text-align: left;
+}
+
+.employment-details {
+  display: flex;
+  flex-direction: column; /* stack h1, tech-logos, h3 vertically */
+  align-items: left;    /* center horizontally */
+  gap: 0.5em;             /* spacing between children */
+}
+
+
+.card {
+  position: relative; /* needed for absolute positioning of logo */
+}
+
+.github-link {
+  position: absolute;
+  top: 1.5em;
+  right: 1.5em;
+  width: 3.5em;      /* adjust size as needed */
+  height: 3.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.github-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(0.2); /* optional: makes icon darker/lighter on white background */
+  transition: transform 0.2s;
+}
+
+.github-link:hover img {
+  transform: scale(1.2); /* subtle hover effect */
+}
+
+.tech-logos {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: left;
+  align-items: left;
+  flex-wrap: wrap;
+  width: auto;
+}
+
+.tech-logo-container {
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  padding: 0.4em;
+  box-shadow: 0 2px 6px var(--hover-color);
+  transition: transform 0.2s;
+  margin-top: 0.5em; /* <-- adds space below the logos */
+  margin-bottom: 1em; /* <-- adds space below the logos */
+}
+
+.tech-logo-container:hover {
+  transform: scale(1.2);
+}
+
+.tech-logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-image-container {
+  display: flex;
+  justify-content: center;   /* center the image horizontally */
+  margin-top: 1em;           /* space above the image */
+}
+
+.card-image-container img {
+  max-width: 100%;           /* responsive width */
+  max-height: 13em;
+  border-radius: 12px;       /* rounded corners */
+  box-shadow: 0 4px 12px var(--hover-color); /* subtle shadow */
+}
+
+@media screen and (max-width: 700px){
     #open-sidebar-button, #close-sidebar-button{
         display: block;
       }
@@ -143,7 +346,21 @@ footer{
     nav .home-li{
         margin-right: unset;
     }
-    #about-container {
+    .about-container {
         flex-direction: column;
+    }
+
+    .experience-logo-container {
+        width: 5em;
+        height: 5em;
+    }
+
+    .experience-logo {
+        max-width: 4.5em;
+        max-height: 4.5em;
+    }
+
+    .card{
+      flex: 0 0 27em;
     }
 }

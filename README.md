@@ -24,3 +24,9 @@ Deployment is automatically run using the GHA `deploy.yaml` whenever code is mer
   - Tutorial for creating an accessible navbar in pure HTML, CSS and JS
 - [React App on AWS S3 with Static Hosting + Cloudfront | Practical AWS Projects #1](https://www.youtube.com/watch?v=mls8tiiI3uc&ab_channel=BeABetterDev)
   - Tutorial for deploying site on s3 with Route53 for DNS routing and CloudFront for certificate handling amongst other things. 
+
+## Local development 
+Deploy on local server using 
+```commandline
+npx @11ty/eleventy --input ./portfolio --output ./portfolio/_site --config portfolio/eleventy.config.js --serve
+```
